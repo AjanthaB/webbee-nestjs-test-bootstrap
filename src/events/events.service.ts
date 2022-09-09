@@ -92,7 +92,14 @@ export class EventsService {
 
   @Get('events')
   async getEventsWithWorkshops() {
-    throw new Error('TODO task 1');
+    return this.eventRepository
+      .createQueryBuilder()
+      .select('event.id', 'id')
+      .addSelect('event.name', 'name')
+      .addSelect('event.createdAt', 'createdAt')
+      // .leftJoinAndSelect('event.id', 'workshop', 'event.id=workshop.eventId')
+      // .printSql()
+      .getRawMany();
   }
 
   /*
@@ -162,6 +169,13 @@ export class EventsService {
      */
   @Get('futureevents')
   async getFutureEventWithWorkshops() {
-    throw new Error('TODO task 2');
+    return this.eventRepository
+      .createQueryBuilder()
+      .select('event.id', 'id')
+      .addSelect('event.name', 'name')
+      .addSelect('event.createdAt', 'createdAt')
+      // .leftJoinAndSelect('event.id', 'workshop', 'event.id=workshop.eventId')
+      .printSql()
+      .getRawMany();
   }
 }
