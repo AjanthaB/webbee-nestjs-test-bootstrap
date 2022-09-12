@@ -92,13 +92,13 @@ export class EventsService {
 
   @Get('events')
   async getEventsWithWorkshops() {
+    // I don't have much experience with type orm and SQL since I was mostly worked on mongoose and Mongodb
     return this.eventRepository
       .createQueryBuilder()
       .select('event.id', 'id')
       .addSelect('event.name', 'name')
       .addSelect('event.createdAt', 'createdAt')
-      // .leftJoinAndSelect('event.id', 'workshop', 'event.id=workshop.eventId')
-      // .printSql()
+      .leftJoinAndSelect('event.id', 'workshop', 'event.id=workshop.eventId')
       .getRawMany();
   }
 
@@ -169,13 +169,6 @@ export class EventsService {
      */
   @Get('futureevents')
   async getFutureEventWithWorkshops() {
-    return this.eventRepository
-      .createQueryBuilder()
-      .select('event.id', 'id')
-      .addSelect('event.name', 'name')
-      .addSelect('event.createdAt', 'createdAt')
-      // .leftJoinAndSelect('event.id', 'workshop', 'event.id=workshop.eventId')
-      .printSql()
-      .getRawMany();
+    // I don't have much experience with type orm and SQL since I was mostly worked on mongoose and Mongodb
   }
 }
